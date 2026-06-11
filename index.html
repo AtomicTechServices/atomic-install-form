@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Equipment Install Request — Atomic Coffee Roasters</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: #f4f4f2;
+      color: rgba(0,0,0,0.75);
+      min-height: 100vh;
+      font-size: 15px;
+      letter-spacing: 0.01em;
+    }
+
+    .announcement {
+      background: #0a0a0a;
+      color: white;
+      text-align: center;
+      padding: 10px 24px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    nav {
+      background: #ffffff;
+      border-bottom: 1px solid #e8e8e8;
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-brand {
+      font-family: 'Cooper Black', 'Cooper Std Black', serif;
+      font-size: 15px;
+      font-weight: 400;
+      color: #0a0a0a;
+      letter-spacing: 0.02em;
+    }
+    .nav-sub {
+      font-size: 12px;
+      color: rgba(0,0,0,0.4);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    main { max-width: 680px; margin: 0 auto; padding: 40px 24px 72px; }
+
+    .page-header { margin-bottom: 32px; }
+    .page-header h1 {
+      font-family: 'Cooper Black', 'Cooper Std Black', serif;
+      font-size: 36px;
+      font-weight: 400;
+      color: #0a0a0a;
+      margin-bottom: 10px;
+      letter-spacing: 0.01em;
+    }
+    .page-header p {
+      font-size: 15px;
+      color: rgba(0,0,0,0.55);
+      line-height: 1.65;
+    }
+
+    .info-strip {
+      background: #e8f8f6;
+      border-left: 3px solid #7ecec4;
+      padding: 14px 18px;
+      margin-bottom: 28px;
+      font-size: 13px;
+      color: rgba(0,0,0,0.65);
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      line-height: 1.55;
+    }
+    .info-strip .icon { flex-shrink: 0; font-size: 16px; margin-top: 1px; }
+
+    .card {
+      background: #ffffff;
+      border: 1px solid #e0e0e0;
+      padding: 28px;
+      margin-bottom: 16px;
+    }
+    .card-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #7ecec4;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #e0f5f3;
+    }
+
+    /* section divider within a card */
+    .section-block {
+      padding-bottom: 24px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .section-block:last-child {
+      padding-bottom: 0;
+      margin-bottom: 0;
+      border-bottom: none;
+    }
+    .section-block h3 {
+      font-family: 'Cooper Black', 'Cooper Std Black', serif;
+      font-size: 15px;
+      font-weight: 400;
+      color: #0a0a0a;
+      margin-bottom: 14px;
+      letter-spacing: 0.01em;
+    }
+
+    .field-group { margin-bottom: 20px; }
+    .field-group:last-child { margin-bottom: 0; }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      color: #0a0a0a;
+      margin-bottom: 6px;
+      letter-spacing: 0.02em;
+    }
+    label .required { color: #7ecec4; margin-left: 2px; }
+    label .hint { font-weight: 400; color: rgba(0,0,0,0.4); font-size: 12px; margin-left: 4px; }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid #d0d0d0;
+      border-radius: 0;
+      font-size: 15px;
+      font-family: 'Outfit', sans-serif;
+      color: #0a0a0a;
+      background: white;
+      transition: border-color 0.15s;
+      -webkit-appearance: none;
+      letter-spacing: 0.01em;
+    }
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: #0a0a0a;
+    }
+    textarea { resize: vertical; min-height: 80px; }
+    select {
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23666' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+    }
+
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 500px) { .two-col { grid-template-columns: 1fr; } }
+
+    /* radio rows */
+    .check-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+    .check-row:last-of-type { margin-bottom: 0; }
+    .check-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #444;
+      min-width: 160px;
+    }
+    .radio-group { display: flex; gap: 16px; flex-wrap: wrap; }
+    .radio-option {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+    .radio-option input[type="radio"] {
+      width: 16px;
+      height: 16px;
+      accent-color: #7ecec4;
+      cursor: pointer;
+    }
+    .radio-option span { font-size: 14px; color: #333; }
+
+    /* photo upload */
+    .photo-upload { margin-top: 16px; }
+    .upload-label {
+      display: flex !important;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px !important;
+      font-weight: 700 !important;
+      color: #7ecec4 !important;
+      letter-spacing: 0.06em !important;
+      text-transform: uppercase;
+      margin-bottom: 8px !important;
+    }
+    .file-drop {
+      border: 2px dashed #d0d0d0;
+      padding: 16px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      position: relative;
+    }
+    .file-drop:hover { border-color: #7ecec4; background: #fdf8f0; }
+    .file-drop.required-empty { border-color: #ef4444; background: #fff8f7; }
+    .file-drop input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+    .file-drop .drop-text { font-size: 13px; color: #888; pointer-events: none; }
+    .file-drop .drop-text strong { color: #7ecec4; }
+    .file-preview { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .file-preview .thumb {
+      width: 72px; height: 72px;
+      object-fit: cover;
+      border: 1px solid #e0e0e0;
+    }
+    .upload-error {
+      font-size: 12px;
+      color: #ef4444;
+      margin-top: 6px;
+      display: none;
+    }
+    .upload-error.visible { display: block; }
+
+    /* rank lists */
+    .rank-list { list-style: none; }
+    .rank-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 14px;
+      background: #fafafa;
+      border: 1px solid #e0e0e0;
+      margin-bottom: 6px;
+      cursor: grab;
+      transition: background 0.1s, box-shadow 0.1s;
+      user-select: none;
+    }
+    .rank-item:last-child { margin-bottom: 0; }
+    .rank-item.dragging {
+      background: #e8f8f6;
+      border-color: #7ecec4;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+      cursor: grabbing;
+    }
+    .rank-item.drag-over { border-color: #7ecec4; background: #fdf4e3; }
+    .rank-badge {
+      width: 24px; height: 24px;
+      background: #0a0a0a;
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .rank-handle { color: #ccc; font-size: 14px; flex-shrink: 0; }
+    .rank-text { font-size: 14px; font-weight: 600; color: #0a0a0a; flex: 1; }
+    .rank-sub { font-size: 12px; color: rgba(0,0,0,0.4); }
+    .drag-hint { font-size: 12px; color: rgba(0,0,0,0.35); margin-top: 8px; }
+
+    /* acknowledgment */
+    .penalty {
+      background: #e8f8f6;
+      border-left: 3px solid #7ecec4;
+      padding: 14px 18px;
+      font-size: 13px;
+      color: rgba(0,0,0,0.65);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .sig-row { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; }
+    @media (max-width: 500px) { .sig-row { grid-template-columns: 1fr; } }
+
+    /* submit */
+    .submit-area { margin-top: 28px; }
+    .btn-submit {
+      width: 100%;
+      padding: 16px;
+      background: #0a0a0a;
+      color: #ffffff;
+      border: none;
+      border-radius: 0;
+      font-size: 13px;
+      font-weight: 700;
+      font-family: 'Outfit', sans-serif;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .btn-submit:hover { background: #2a2a2a; }
+
+    .form-note {
+      font-size: 12px;
+      color: rgba(0,0,0,0.4);
+      text-align: center;
+      margin-top: 12px;
+    }
+
+    .error-banner {
+      display: none;
+      background: #fee2e2;
+      border-left: 3px solid #ef4444;
+      padding: 12px 16px;
+      font-size: 13px;
+      color: #991b1b;
+      margin-bottom: 16px;
+    }
+    .error-banner.visible { display: block; }
+  </style>
+</head>
+<style>
+  #pw-gate {
+    position: fixed;
+    inset: 0;
+    background: #0a0a0a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    padding: 24px;
+  }
+  #pw-gate .pw-brand {
+    font-family: 'Cooper Black', 'Cooper Std Black', serif;
+    font-size: 18px;
+    color: #ffffff;
+    letter-spacing: 0.04em;
+    margin-bottom: 32px;
+  }
+  #pw-gate .pw-box {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    padding: 36px 32px;
+    width: 100%;
+    max-width: 360px;
+    text-align: center;
+  }
+  #pw-gate .pw-box h2 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #7ecec4;
+    margin-bottom: 20px;
+  }
+  #pw-gate input[type="password"] {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #444;
+    background: #0a0a0a;
+    color: #ffffff;
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    margin-bottom: 12px;
+    border-radius: 0;
+    -webkit-appearance: none;
+  }
+  #pw-gate input[type="password"]:focus {
+    outline: none;
+    border-color: #7ecec4;
+  }
+  #pw-gate .pw-btn {
+    width: 100%;
+    padding: 13px;
+    background: #7ecec4;
+    color: #0a0a0a;
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  #pw-gate .pw-btn:hover { background: #5db8ae; }
+  #pw-gate .pw-error {
+    font-size: 12px;
+    color: #ef4444;
+    margin-top: 10px;
+    min-height: 16px;
+  }
+</style>
+
+<body>
+
+<div id="pw-gate">
+  <div class="pw-brand">Atomic Coffee Roasters</div>
+  <div class="pw-box">
+    <h2>Enter Password to Continue</h2>
+    <input type="password" id="pw-input" placeholder="Password" onkeydown="if(event.key==='Enter')checkPassword()" />
+    <button class="pw-btn" onclick="checkPassword()">Continue</button>
+    <div class="pw-error" id="pw-error"></div>
+  </div>
+</div>
+
+<div id="pw-content" style="display:none">
+
+<div class="announcement">Atomic Coffee Roasters &mdash; Technical Services</div>
+
+<nav>
+  <span class="nav-brand">Atomic Coffee Roasters</span>
+  <span class="nav-sub">Equipment Installation</span>
+</nav>
+
+<main>
+  <div class="page-header">
+    <h1>Schedule an Equipment Installation</h1>
+    <p>Complete all sections and submit this form to request your installation date. Our technical team will follow up within 1–2 business days to confirm.</p>
+  </div>
+
+  <div class="info-strip">
+    <span class="icon">&#9432;</span>
+    <span><strong>Before submitting:</strong> Please confirm that your site has completed the pre-installation requirements provided by your Atomic account manager. Installation cannot proceed until the site is ready.</span>
+  </div>
+
+  <form
+    action="https://formsubmit.co/techservice@atomicroastery.com"
+    method="POST"
+    enctype="multipart/form-data"
+    id="install-form"
+    novalidate
+  >
+    <input type="hidden" name="_subject" value="Equipment Install Request Submission" />
+    <input type="hidden" name="_captcha" value="false" />
+    <input type="hidden" name="_template" value="table" />
+
+    <div class="error-banner" id="error-banner">Please fill in all required fields and upload at least one photo for each site readiness section.</div>
+
+    <!-- Contact Info -->
+    <div class="card">
+      <div class="card-title">Contact Information</div>
+
+      <div class="field-group">
+        <label>Business Name <span class="required">*</span></label>
+        <input type="text" name="Business Name" placeholder="e.g. The Daily Grind Cafe" required>
+      </div>
+
+      <div class="two-col">
+        <div class="field-group">
+          <label>Contact Name <span class="required">*</span></label>
+          <input type="text" name="Contact Name" placeholder="First & last name" required>
+        </div>
+        <div class="field-group">
+          <label>Email <span class="required">*</span></label>
+          <input type="email" name="Email" placeholder="you@example.com" required>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label>Phone <span class="hint">(optional)</span></label>
+        <input type="tel" name="Phone" placeholder="(978) 555-0100">
+      </div>
+    </div>
+
+    <!-- Site Info -->
+    <div class="card">
+      <div class="card-title">Installation Site</div>
+
+      <div class="field-group">
+        <label>Installation Address <span class="required">*</span></label>
+        <input type="text" name="Installation Address" placeholder="Street, City, State, ZIP" required>
+      </div>
+
+      <div class="field-group">
+        <label>On-Site Contact <span class="hint">(if different from above)</span></label>
+        <input type="text" name="On-Site Contact" placeholder="Name and best number to reach them">
+      </div>
+    </div>
+
+    <!-- Equipment -->
+    <div class="card">
+      <div class="card-title">Equipment</div>
+
+      <div class="field-group">
+        <label>Equipment Being Installed by Atomic <span class="required">*</span></label>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:4px">
+          <label class="radio-option" style="font-weight:400;text-transform:none;letter-spacing:0"><input type="checkbox" name="Equipment" value="Drip Coffee Brewer" style="width:16px;height:16px;accent-color:#7ecec4;margin-right:6px"><span>Drip Coffee Brewer</span></label>
+          <label class="radio-option" style="font-weight:400;text-transform:none;letter-spacing:0"><input type="checkbox" name="Equipment" value="Espresso Machine" style="width:16px;height:16px;accent-color:#7ecec4;margin-right:6px"><span>Espresso Machine</span></label>
+          <label class="radio-option" style="font-weight:400;text-transform:none;letter-spacing:0"><input type="checkbox" name="Equipment" value="Grinder" style="width:16px;height:16px;accent-color:#7ecec4;margin-right:6px"><span>Grinder</span></label>
+          <label class="radio-option" style="font-weight:400;text-transform:none;letter-spacing:0"><input type="checkbox" name="Equipment" value="Other" id="equipment-other-cb" style="width:16px;height:16px;accent-color:#7ecec4;margin-right:6px"><span>Other</span></label>
+        </div>
+      </div>
+
+
+      <div class="field-group">
+        <label>New site install or replacing prior equipment? <span class="required">*</span></label>
+        <select name="New or Replacement" required>
+          <option value="" disabled selected>Select one</option>
+          <option value="New site install">New site install</option>
+          <option value="Replacing prior equipment">Replacing prior equipment</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- ── ESPRESSO MACHINE section ── -->
+    <div class="card" id="section-espresso" style="display:none">
+      <div class="card-title">Espresso Machine</div>
+
+      <div class="section-block">
+        <h3>Electrical</h3>
+        <div class="check-row">
+          <span class="check-label">Receptacle installed &amp; tested?</span>
+          <div class="radio-group">
+            <label class="radio-option"><input type="radio" name="Espresso: Receptacle" value="Yes" /><span>Yes</span></label>
+            <label class="radio-option"><input type="radio" name="Espresso: Receptacle" value="No" /><span>No</span></label>
+          </div>
+        </div>
+        <div class="photo-upload">
+          <label class="upload-label" for="photos_esp_elec">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            Photos — Receptacle &amp; Breaker Panel <span style="color:#ef4444;margin-left:2px">*</span>
+          </label>
+          <div class="file-drop" id="drop_esp_elec" onclick="document.getElementById('photos_esp_elec').click()">
+            <input type="file" id="photos_esp_elec" name="Photos: Espresso Electrical" accept="image/*" multiple onchange="previewFiles(this,'preview_esp_elec','drop_esp_elec','err_esp_elec')" />
+            <div class="drop-text"><strong>Tap to add photos</strong><br>JPEG, PNG, HEIC — multiple OK</div>
+          </div>
+          <div class="upload-error" id="err_esp_elec">At least one photo is required.</div>
+          <div class="file-preview" id="preview_esp_elec"></div>
+        </div>
+        <div class="field-group" style="margin-top:16px">
+          <label>Notes <span class="hint">(optional)</span></label>
+          <textarea name="Notes: Espresso Electrical" placeholder="NEMA code on outlet (if illegible in photo), electrician name, scheduled date…"></textarea>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <h3>Water Supply</h3>
+        <div class="check-row">
+          <span class="check-label">Connection installed &amp; tested?</span>
+          <div class="radio-group">
+            <label class="radio-option"><input type="radio" name="Espresso: Water Supply" value="Yes" /><span>Yes</span></label>
+            <label class="radio-option"><input type="radio" name="Espresso: Water Supply" value="No" /><span>No</span></label>
+          </div>
+        </div>
+        <div class="check-row">
+          <span class="check-label">Line pressure confirmed?</span>
+          <div class="radio-group">
+            <label class="radio-option"><input type="radio" name="Espresso: Water Pressure" value="Yes" /><span>Yes</span></label>
+            <label class="radio-option"><input type="radio" name="Espresso: Water Pressure" value="No" /><span>No</span></label>
+            <label class="radio-option"><input type="radio" name="Espresso: Water Pressure" value="Unknown" /><span>Unknown</span></label>
+          </div>
+        </div>
+        <div class="photo-upload">
+          <label class="upload-label" for="photos_esp_water">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            Photos — Water Connection &amp; Shut-Off Valve <span style="color:#ef4444;margin-left:2px">*</span>
+          </label>
+          <div class="file-drop" id="drop_esp_water" onclick="document.getElementById('photos_esp_water').click()">
+            <input type="file" id="photos_esp_water" name="Photos: Espresso Water Supply" accept="image/*" multiple onchange="previewFiles(this,'preview_esp_water','drop_esp_water','err_esp_water')" />
+            <div class="drop-text"><strong>Tap to add photos</strong><br>JPEG, PNG, HEIC — multiple OK</div>
+          </div>
+          <div class="upload-error" id="err_esp_water">At least one photo is required.</div>
+          <div class="file-preview" id="preview_esp_water"></div>
+        </div>
+        <div class="field-group" style="margin-top:16px">
+          <label>Notes <span class="hint">(optional)</span></label>
+          <textarea name="Notes: Espresso Water Supply" placeholder="Plumber name, scheduled date…"></textarea>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <h3>Filtration</h3>
+        <div class="check-row">
+          <span class="check-label">Filtration currently in place?</span>
+          <div class="radio-group">
+            <label class="radio-option"><input type="radio" name="Espresso: Filtration" value="Yes" /><span>Yes</span></label>
+            <label class="radio-option"><input type="radio" name="Espresso: Filtration" value="No" /><span>No</span></label>
+            <label class="radio-option"><input type="radio" name="Espresso: Filtration" value="Unknown" /><span>Unknown</span></label>
+          </div>
+        </div>
+        <div class="photo-upload">
+          <label class="upload-label" for="photos_esp_filt">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            Photos — Filtration System <span style="color:#ef4444;margin-left:2px">*</span>
+          </label>
+          <div class="file-drop" id="drop_esp_filt" onclick="document.getElementById('photos_esp_filt').click()">
+            <input type="file" id="photos_esp_filt" name="Photos: Espresso Filtration" accept="image/*" multiple onchange="previewFiles(this,'preview_esp_filt','drop_esp_filt','err_esp_filt')" />
+            <div class="drop-text"><strong>Tap to add photos</strong><br>JPEG, PNG, HEIC — multiple OK</div>
+          </div>
+          <div class="upload-error" id="err_esp_filt">At least one photo is required.</div>
+          <div class="file-preview" id="preview_esp_filt"></div>
+        </div>
+        <div class="field-group" style="margin-top:16px">
+          <label>Notes <span class="hint">(optional)</span></label>
+          <textarea name="Notes: Espresso Filtration" placeholder="Filtration type, service date…"></textarea>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <h3>Drainage</h3>
+        <div class="check-row">
+          <span class="check-label">Drain installed &amp; tested?</span>
+          <div class="radio-group">
+            <label class="radio-option"><input type="radio" name="Espresso: Drain" value="Yes" /><span>Yes</span></label>
+            <label class="radio-option"><input type="radio" name="Espresso: Drain" value="No" /><span>No</span></label>
+          </div>
+        </div>
+        <div class="check-row">
+          <span class="check-label">Within 5 ft of espresso machine?</span>
+          <div class="radio-group">
+            <label class="radio-option"><input type="radio" name="Espresso: Drain 5ft" value="Yes" /><span>Yes</span></label>
+            <label class="radio-option"><input type="radio" name="Espresso: Drain 5ft" value="No" /><span>No</span></label>
+          </div>
+        </div>
+        <div class="photo-upload">
+          <label class="upload-label" for="photos_esp_drain">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            Photos — Drain <span style="color:#ef4444;margin-left:2px">*</span>
+          </label>
+          <div class="file-drop" id="drop_esp_drain" onclick="document.getElementById('photos_esp_drain').click()">
+            <input type="file" id="photos_esp_drain" name="Photos: Espresso Drainage" accept="image/*" multiple onchange="previewFiles(this,'preview_esp_drain','drop_esp_drain','err_esp_drain')" />
+            <div class="drop-text"><strong>Tap to add photos</strong><br>JPEG, PNG, HEIC — multiple OK</div>
+          </div>
+          <div class="upload-error" id="err_esp_drain">At least one photo is required.</div>
+          <div class="file-preview" id="preview_esp_drain"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── DRIP COFFEE BREWER section ── -->
+    <div class="card" id="section-drip" style="display:none">
+      <div class="card-title">Drip Coffee Brewer</div>
+
+      <div class="section-block">
+        <h3>Electrical</h3>
+        <div class="check-row">
+          <span class="check-label">Receptacle installed &amp; tested?</span>
+          <div class="radio-group">
+            <label class="radio-option"><input type="radio" name="Drip: Receptacle" value="Yes" /><span>Yes</span></label>
+            <label class="radio-option"><input type="radio" name="Drip: Receptacle" value="No" /><span>No</span></label>
+          </div>
+        </div>
+        <div class="photo-upload">
+          <label class="upload-label" for="photos_drip_elec">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            Photos — Receptacle &amp; Breaker Panel <span style="color:#ef4444;margin-left:2px">*</span>
+          </label>
+          <div class="file-drop" id="drop_drip_elec" onclick="document.getElementById('photos_drip_elec').click()">
+            <input type="file" id="photos_drip_elec" name="Photos: Drip Electrical" accept="image/*" multiple onchange="previewFiles(this,'preview_drip_elec','drop_drip_elec','err_drip_elec')" />
+            <div class="drop-text"><strong>Tap to add photos</strong><br>JPEG, PNG, HEIC — multiple OK</div>
+          </div>
+          <div class="upload-error" id="err_drip_elec">At least one photo is required.</div>
+          <div class="file-preview" id="preview_drip_elec"></div>
+        </div>
+        <div class="field-group" style="margin-top:16px">
+          <label>Notes <span class="hint">(optional)</span></label>
+          <textarea name="Notes: Drip Electrical" placeholder="NEMA code on outlet (if illegible in photo), electrician name, scheduled date…"></textarea>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <h3>Water Supply</h3>
+        <div class="check-row">
+          <span class="check-label">Connection installed &amp; tested?</span>
+          <div class="radio-group">
+            <label class="radio-option"><input type="radio" name="Drip: Water Supply" value="Yes" /><span>Yes</span></label>
+            <label class="radio-option"><input type="radio" name="Drip: Water Supply" value="No" /><span>No</span></label>
+          </div>
+        </div>
+        <div class="check-row">
+          <span class="check-label">Line pressure confirmed?</span>
+          <div class="radio-group">
+            <label class="radio-option"><input type="radio" name="Drip: Water Pressure" value="Yes" /><span>Yes</span></label>
+            <label class="radio-option"><input type="radio" name="Drip: Water Pressure" value="No" /><span>No</span></label>
+            <label class="radio-option"><input type="radio" name="Drip: Water Pressure" value="Unknown" /><span>Unknown</span></label>
+          </div>
+        </div>
+        <div class="photo-upload">
+          <label class="upload-label" for="photos_drip_water">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            Photos — Water Connection &amp; Shut-Off Valve <span style="color:#ef4444;margin-left:2px">*</span>
+          </label>
+          <div class="file-drop" id="drop_drip_water" onclick="document.getElementById('photos_drip_water').click()">
+            <input type="file" id="photos_drip_water" name="Photos: Drip Water Supply" accept="image/*" multiple onchange="previewFiles(this,'preview_drip_water','drop_drip_water','err_drip_water')" />
+            <div class="drop-text"><strong>Tap to add photos</strong><br>JPEG, PNG, HEIC — multiple OK</div>
+          </div>
+          <div class="upload-error" id="err_drip_water">At least one photo is required.</div>
+          <div class="file-preview" id="preview_drip_water"></div>
+        </div>
+        <div class="field-group" style="margin-top:16px">
+          <label>Notes <span class="hint">(optional)</span></label>
+          <textarea name="Notes: Drip Water Supply" placeholder="Plumber name, scheduled date…"></textarea>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <h3>Filtration</h3>
+        <div class="check-row">
+          <span class="check-label">Filtration currently in place?</span>
+          <div class="radio-group">
+            <label class="radio-option"><input type="radio" name="Drip: Filtration" value="Yes" /><span>Yes</span></label>
+            <label class="radio-option"><input type="radio" name="Drip: Filtration" value="No" /><span>No</span></label>
+            <label class="radio-option"><input type="radio" name="Drip: Filtration" value="Unknown" /><span>Unknown</span></label>
+          </div>
+        </div>
+        <div class="photo-upload">
+          <label class="upload-label" for="photos_drip_filt">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            Photos — Filtration System <span style="color:#ef4444;margin-left:2px">*</span>
+          </label>
+          <div class="file-drop" id="drop_drip_filt" onclick="document.getElementById('photos_drip_filt').click()">
+            <input type="file" id="photos_drip_filt" name="Photos: Drip Filtration" accept="image/*" multiple onchange="previewFiles(this,'preview_drip_filt','drop_drip_filt','err_drip_filt')" />
+            <div class="drop-text"><strong>Tap to add photos</strong><br>JPEG, PNG, HEIC — multiple OK</div>
+          </div>
+          <div class="upload-error" id="err_drip_filt">At least one photo is required.</div>
+          <div class="file-preview" id="preview_drip_filt"></div>
+        </div>
+        <div class="field-group" style="margin-top:16px">
+          <label>Notes <span class="hint">(optional)</span></label>
+          <textarea name="Notes: Drip Filtration" placeholder="Filtration type, service date…"></textarea>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── GRINDER section ── -->
+    <div class="card" id="section-grinder" style="display:none">
+      <div class="card-title">Grinder</div>
+
+      <div class="section-block">
+        <h3>Electrical</h3>
+        <div class="check-row">
+          <span class="check-label">Receptacle installed &amp; tested?</span>
+          <div class="radio-group">
+            <label class="radio-option"><input type="radio" name="Grinder: Receptacle" value="Yes" /><span>Yes</span></label>
+            <label class="radio-option"><input type="radio" name="Grinder: Receptacle" value="No" /><span>No</span></label>
+          </div>
+        </div>
+        <div class="photo-upload">
+          <label class="upload-label" for="photos_grndr_elec">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            Photos — Receptacle &amp; Breaker Panel <span style="color:#ef4444;margin-left:2px">*</span>
+          </label>
+          <div class="file-drop" id="drop_grndr_elec" onclick="document.getElementById('photos_grndr_elec').click()">
+            <input type="file" id="photos_grndr_elec" name="Photos: Grinder Electrical" accept="image/*" multiple onchange="previewFiles(this,'preview_grndr_elec','drop_grndr_elec','err_grndr_elec')" />
+            <div class="drop-text"><strong>Tap to add photos</strong><br>JPEG, PNG, HEIC — multiple OK</div>
+          </div>
+          <div class="upload-error" id="err_grndr_elec">At least one photo is required.</div>
+          <div class="file-preview" id="preview_grndr_elec"></div>
+        </div>
+        <div class="field-group" style="margin-top:16px">
+          <label>Notes <span class="hint">(optional)</span></label>
+          <textarea name="Notes: Grinder Electrical" placeholder="NEMA code on outlet (if illegible in photo), electrician name, scheduled date…"></textarea>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── OTHER section ── -->
+    <div class="card" id="section-other" style="display:none">
+      <div class="card-title">Other Equipment</div>
+
+      <div class="section-block">
+        <div class="field-group">
+          <label>Please describe the equipment <span style="color:#ef4444;margin-left:2px">*</span></label>
+          <input type="text" name="Equipment: Other Description" placeholder="Equipment name and any relevant details…">
+        </div>
+        <div class="photo-upload" style="margin-top:4px">
+          <label class="upload-label" for="photos_other">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            Photos <span style="color:#ef4444;margin-left:2px">*</span>
+          </label>
+          <div class="file-drop" id="drop_other" onclick="document.getElementById('photos_other').click()">
+            <input type="file" id="photos_other" name="Photos: Other Equipment" accept="image/*" multiple onchange="previewFiles(this,'preview_other','drop_other','err_other')" />
+            <div class="drop-text"><strong>Tap to add photos</strong><br>JPEG, PNG, HEIC — multiple OK</div>
+          </div>
+          <div class="upload-error" id="err_other">At least one photo is required.</div>
+          <div class="file-preview" id="preview_other"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Counter & Space (always shown) -->
+    <div class="card">
+      <div class="card-title">Counter &amp; Space</div>
+
+      <div class="section-block">
+        <div class="info-strip" style="margin-bottom:16px">
+          <span class="icon">&#9432;</span>
+          <span>If your electrical receptacle or water supply connection is located below the counter, a 2–3" diameter hole must be cut into the counter behind the machine prior to installation to run lines through. Please refer to spec sheets sent by your Atomic account manager for placement.</span>
+        </div>
+
+        <div class="check-row">
+          <span class="check-label">Counter ready?</span>
+          <div class="radio-group">
+            <label class="radio-option"><input type="radio" name="Counter Ready" value="Yes" /><span>Yes</span></label>
+            <label class="radio-option"><input type="radio" name="Counter Ready" value="No" /><span>No</span></label>
+          </div>
+        </div>
+
+        <div class="photo-upload">
+          <label class="upload-label" for="photos_counter">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            Photos — Counter Area <span style="color:#ef4444;margin-left:2px">*</span>
+          </label>
+          <div class="file-drop" id="drop_counter" onclick="document.getElementById('photos_counter').click()">
+            <input type="file" id="photos_counter" name="Photos: Counter" accept="image/*" multiple onchange="previewFiles(this,'preview_counter','drop_counter','err_counter')" />
+            <div class="drop-text"><strong>Tap to add photos</strong><br>JPEG, PNG, HEIC — multiple OK</div>
+          </div>
+          <div class="upload-error" id="err_counter">At least one photo is required.</div>
+          <div class="file-preview" id="preview_counter"></div>
+        </div>
+
+        <div class="field-group" style="margin-top:16px">
+          <label>Notes <span class="hint">(optional)</span></label>
+          <textarea name="Notes: Counter" placeholder="Counter dimensions, knock-out hole status, clearance concerns…"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Training Supplies (always shown) -->
+    <div class="card">
+      <div class="card-title">Training Supplies</div>
+      <div class="check-row">
+        <span class="check-label">Coffee &amp; filters on-site?</span>
+        <div class="radio-group">
+          <label class="radio-option"><input type="radio" name="Training Supplies On-Site" value="Yes" required /><span>Yes</span></label>
+          <label class="radio-option"><input type="radio" name="Training Supplies On-Site" value="No" /><span>No</span></label>
+          <label class="radio-option"><input type="radio" name="Training Supplies On-Site" value="Not needed" /><span>Not needed</span></label>
+        </div>
+      </div>
+      <div class="field-group" style="margin-top:16px">
+        <label>Notes <span class="hint">(optional)</span></label>
+        <textarea name="Notes: Training Supplies" placeholder="Coffee on hand, staff available for training…"></textarea>
+      </div>
+    </div>
+
+    <!-- Availability -->
+    <div class="card">
+      <div class="card-title">Install Availability</div>
+
+      <div class="info-strip" style="margin-bottom:24px">
+        <span class="icon">&#9432;</span>
+        <span>We'll do our best to accommodate your preferences. The more flexibility you can offer, the sooner we'll likely be able to get to your install.</span>
+      </div>
+
+      <div class="field-group">
+        <label>Which days is your site available? <span class="required">*</span></label>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:4px">
+          <label class="radio-option" style="font-weight:400;text-transform:none;letter-spacing:0"><input type="checkbox" name="Available Days" value="Monday" style="width:16px;height:16px;accent-color:#7ecec4;margin-right:4px"><span>Monday</span></label>
+          <label class="radio-option" style="font-weight:400;text-transform:none;letter-spacing:0"><input type="checkbox" name="Available Days" value="Tuesday" style="width:16px;height:16px;accent-color:#7ecec4;margin-right:4px"><span>Tuesday</span></label>
+          <label class="radio-option" style="font-weight:400;text-transform:none;letter-spacing:0"><input type="checkbox" name="Available Days" value="Wednesday" style="width:16px;height:16px;accent-color:#7ecec4;margin-right:4px"><span>Wednesday</span></label>
+          <label class="radio-option" style="font-weight:400;text-transform:none;letter-spacing:0"><input type="checkbox" name="Available Days" value="Thursday" style="width:16px;height:16px;accent-color:#7ecec4;margin-right:4px"><span>Thursday</span></label>
+          <label class="radio-option" style="font-weight:400;text-transform:none;letter-spacing:0"><input type="checkbox" name="Available Days" value="Friday" style="width:16px;height:16px;accent-color:#7ecec4;margin-right:4px"><span>Friday</span></label>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label>Time of day preference <span class="required">*</span></label>
+        <div class="radio-group" style="margin-top:4px">
+          <label class="radio-option"><input type="radio" name="Time Preference" value="Morning (AM)" required /><span>Morning (AM)</span></label>
+          <label class="radio-option"><input type="radio" name="Time Preference" value="Afternoon (PM)" /><span>Afternoon (PM)</span></label>
+          <label class="radio-option"><input type="radio" name="Time Preference" value="No preference" /><span>No preference</span></label>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label>Any dates to avoid? <span class="hint">(optional)</span></label>
+        <input type="text" name="Dates to Avoid" placeholder="e.g. Dec 23–Jan 2, every Monday in March">
+      </div>
+
+    </div>
+
+    <!-- Additional Notes -->
+    <div class="card">
+      <div class="card-title">Additional Notes</div>
+      <div class="field-group">
+        <label>Anything else we should know? <span class="hint">(optional)</span></label>
+        <textarea name="Additional Notes" style="min-height:100px" placeholder="Building access, parking, loading dock, security sign-in, scheduling constraints…"></textarea>
+      </div>
+    </div>
+
+    <!-- Acknowledgment -->
+    <div class="card">
+      <div class="card-title">Acknowledgment</div>
+
+      <div class="penalty">
+        <strong>Important:</strong> All site requirements must be complete before installation can be scheduled. If installation cannot be completed on the first visit due to site conditions or missing supplies, additional visits will be billed at standard travel and labor rates. Questions? Email <a href="mailto:techservice@atomicroastery.com" style="color:#7ecec4">techservice@atomicroastery.com</a>.
+      </div>
+
+      <div class="sig-row">
+        <div class="field-group">
+          <label>Printed Name <span class="required">*</span></label>
+          <input type="text" name="Printed Name" placeholder="Full name" required>
+        </div>
+        <div class="field-group">
+          <label>Date <span class="required">*</span></label>
+          <input type="text" name="Date" id="sig_date" placeholder="MM/DD/YYYY" required>
+        </div>
+      </div>
+
+      <div class="submit-area">
+        <button type="submit" class="btn-submit" id="submit-btn">Submit Installation Request</button>
+        <p class="form-note">We'll follow up within 1–2 business days to confirm your install date.</p>
+      </div>
+    </div>
+
+  </form>
+</main>
+
+</div><!-- end #pw-content -->
+
+<script>
+  function checkPassword() {
+    const input = document.getElementById('pw-input').value;
+    if (input === 'CoffeeEQ123') {
+      document.getElementById('pw-gate').style.display = 'none';
+      document.getElementById('pw-content').style.display = 'block';
+    } else {
+      document.getElementById('pw-error').textContent = 'Incorrect password. Please try again.';
+      document.getElementById('pw-input').value = '';
+      document.getElementById('pw-input').focus();
+    }
+  }
+  // Auto-focus password field on load
+  window.addEventListener('load', () => document.getElementById('pw-input').focus());
+</script>
+
+<script>
+  // Map each equipment checkbox value → { sectionId, requiredPhotoIds[] }
+  const EQUIPMENT_MAP = {
+    'Espresso Machine': {
+      section: 'section-espresso',
+      photos: ['photos_esp_elec', 'photos_esp_water', 'photos_esp_filt', 'photos_esp_drain']
+    },
+    'Drip Coffee Brewer': {
+      section: 'section-drip',
+      photos: ['photos_drip_elec', 'photos_drip_water', 'photos_drip_filt']
+    },
+    'Grinder': {
+      section: 'section-grinder',
+      photos: ['photos_grndr_elec']
+    },
+    'Other': {
+      section: 'section-other',
+      photos: ['photos_other']
+    }
+  };
+
+  function clearSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    section.querySelectorAll('input[type="radio"], input[type="text"], textarea').forEach(el => {
+      if (el.type === 'radio') el.checked = false;
+      else el.value = '';
+    });
+    section.querySelectorAll('input[type="file"]').forEach(el => { el.value = ''; });
+    section.querySelectorAll('.file-preview').forEach(el => { el.innerHTML = ''; });
+    section.querySelectorAll('.file-drop').forEach(el => { el.classList.remove('required-empty'); });
+    section.querySelectorAll('.upload-error').forEach(el => { el.classList.remove('visible'); });
+  }
+
+  document.querySelectorAll('input[name="Equipment"]').forEach(cb => {
+    cb.addEventListener('change', function() {
+      const config = EQUIPMENT_MAP[this.value];
+      if (!config) return;
+      const section = document.getElementById(config.section);
+      section.style.display = this.checked ? 'block' : 'none';
+      if (!this.checked) clearSection(config.section);
+    });
+  });
+
+  function previewFiles(input, previewId, dropId, errId) {
+    const container = document.getElementById(previewId);
+    const drop = document.getElementById(dropId);
+    const err  = document.getElementById(errId);
+    container.innerHTML = '';
+    Array.from(input.files).forEach(file => {
+      if (!file.type.startsWith('image/')) return;
+      const reader = new FileReader();
+      reader.onload = e => {
+        const img = document.createElement('img');
+        img.src = e.target.result;
+        img.className = 'thumb';
+        img.title = file.name;
+        container.appendChild(img);
+      };
+      reader.readAsDataURL(file);
+    });
+    if (input.files.length > 0) {
+      drop.classList.remove('required-empty');
+      err.classList.remove('visible');
+    }
+  }
+
+  document.getElementById('install-form').addEventListener('submit', function(e) {
+    let valid = true;
+
+    // Counter photo always required
+    const counterInput = document.getElementById('photos_counter');
+    if (!counterInput.files || counterInput.files.length === 0) {
+      document.getElementById('drop_counter').classList.add('required-empty');
+      document.getElementById('err_counter').classList.add('visible');
+      valid = false;
+    }
+
+    // Validate required photos only for visible equipment sections
+    document.querySelectorAll('input[name="Equipment"]:checked').forEach(cb => {
+      const config = EQUIPMENT_MAP[cb.value];
+      if (!config) return;
+      config.photos.forEach(photoId => {
+        const input = document.getElementById(photoId);
+        const drop  = document.getElementById(photoId.replace('photos_', 'drop_'));
+        const err   = document.getElementById(photoId.replace('photos_', 'err_'));
+        if (!input || !input.files || input.files.length === 0) {
+          if (drop) drop.classList.add('required-empty');
+          if (err)  err.classList.add('visible');
+          valid = false;
+        }
+      });
+    });
+
+    if (!valid) {
+      e.preventDefault();
+      document.getElementById('error-banner').classList.add('visible');
+      const first = document.querySelector('.required-empty');
+      if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  });
+
+  // Auto-fill date
+  const dateField = document.getElementById('sig_date');
+  if (dateField) {
+    const t = new Date();
+    dateField.value = (t.getMonth()+1).toString().padStart(2,'0') + '/' + t.getDate().toString().padStart(2,'0') + '/' + t.getFullYear();
+  }
+</script>
+
+</body>
+</html>
