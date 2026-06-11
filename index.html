@@ -227,12 +227,7 @@
     .file-drop:hover { border-color: #7ecec4; background: #fdf8f0; }
     .file-drop.required-empty { border-color: #ef4444; background: #fff8f7; }
     .file-drop input[type="file"] {
-      position: absolute;
-      inset: 0;
-      opacity: 0;
-      width: 100%;
-      height: 100%;
-      cursor: pointer;
+      display: none;
     }
     .file-drop .drop-text { font-size: 13px; color: #888; pointer-events: none; }
     .file-drop .drop-text strong { color: #7ecec4; }
@@ -539,11 +534,11 @@
           </div>
         </div>
         <div class="photo-upload">
-          <label class="upload-label" for="photos_esp_elec">
+          <label class="upload-label">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
             Photos — Receptacle &amp; Breaker Panel <span style="color:#ef4444;margin-left:2px">*</span>
           </label>
-          <div class="file-drop" id="drop_esp_elec" onclick="document.getElementById('photos_esp_elec').click()">
+          <div class="file-drop" id="drop_esp_elec">
             <input type="file" id="photos_esp_elec" name="Photos: Espresso Electrical" accept="image/*" multiple onchange="previewFiles(this,'preview_esp_elec','drop_esp_elec','err_esp_elec')" />
             <div class="drop-text"><strong>Tap to add photos</strong><br>JPEG, PNG, HEIC — multiple OK</div>
           </div>
@@ -574,11 +569,11 @@
           </div>
         </div>
         <div class="photo-upload">
-          <label class="upload-label" for="photos_esp_water">
+          <label class="upload-label">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
             Photos — Water Connection &amp; Shut-Off Valve <span style="color:#ef4444;margin-left:2px">*</span>
           </label>
-          <div class="file-drop" id="drop_esp_water" onclick="document.getElementById('photos_esp_water').click()">
+          <div class="file-drop" id="drop_esp_water">
             <input type="file" id="photos_esp_water" name="Photos: Espresso Water Supply" accept="image/*" multiple onchange="previewFiles(this,'preview_esp_water','drop_esp_water','err_esp_water')" />
             <div class="drop-text"><strong>Tap to add photos</strong><br>JPEG, PNG, HEIC — multiple OK</div>
           </div>
@@ -602,11 +597,11 @@
           </div>
         </div>
         <div class="photo-upload">
-          <label class="upload-label" for="photos_esp_filt">
+          <label class="upload-label">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
             Photos — Filtration System <span style="color:#ef4444;margin-left:2px">*</span>
           </label>
-          <div class="file-drop" id="drop_esp_filt" onclick="document.getElementById('photos_esp_filt').click()">
+          <div class="file-drop" id="drop_esp_filt">
             <input type="file" id="photos_esp_filt" name="Photos: Espresso Filtration" accept="image/*" multiple onchange="previewFiles(this,'preview_esp_filt','drop_esp_filt','err_esp_filt')" />
             <div class="drop-text"><strong>Tap to add photos</strong><br>JPEG, PNG, HEIC — multiple OK</div>
           </div>
@@ -636,11 +631,11 @@
           </div>
         </div>
         <div class="photo-upload">
-          <label class="upload-label" for="photos_esp_drain">
+          <label class="upload-label">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
             Photos — Drain <span style="color:#ef4444;margin-left:2px">*</span>
           </label>
-          <div class="file-drop" id="drop_esp_drain" onclick="document.getElementById('photos_esp_drain').click()">
+          <div class="file-drop" id="drop_esp_drain">
             <input type="file" id="photos_esp_drain" name="Photos: Espresso Drainage" accept="image/*" multiple onchange="previewFiles(this,'preview_esp_drain','drop_esp_drain','err_esp_drain')" />
             <div class="drop-text"><strong>Tap to add photos</strong><br>JPEG, PNG, HEIC — multiple OK</div>
           </div>
@@ -665,11 +660,11 @@
           </div>
         </div>
         <div class="photo-upload">
-          <label class="upload-label" for="photos_drip_elec">
+          <label class="upload-label">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
             Photos — Receptacle &amp; Breaker Panel <span style="color:#ef4444;margin-left:2px">*</span>
           </label>
-          <div class="file-drop" id="drop_drip_elec" onclick="document.getElementById('photos_drip_elec').click()">
+          <div class="file-drop" id="drop_drip_elec">
             <input type="file" id="photos_drip_elec" name="Photos: Drip Electrical" accept="image/*" multiple onchange="previewFiles(this,'preview_drip_elec','drop_drip_elec','err_drip_elec')" />
             <div class="drop-text"><strong>Tap to add photos</strong><br>JPEG, PNG, HEIC — multiple OK</div>
           </div>
@@ -700,11 +695,11 @@
           </div>
         </div>
         <div class="photo-upload">
-          <label class="upload-label" for="photos_drip_water">
+          <label class="upload-label">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
             Photos — Water Connection &amp; Shut-Off Valve <span style="color:#ef4444;margin-left:2px">*</span>
           </label>
-          <div class="file-drop" id="drop_drip_water" onclick="document.getElementById('photos_drip_water').click()">
+          <div class="file-drop" id="drop_drip_water">
             <input type="file" id="photos_drip_water" name="Photos: Drip Water Supply" accept="image/*" multiple onchange="previewFiles(this,'preview_drip_water','drop_drip_water','err_drip_water')" />
             <div class="drop-text"><strong>Tap to add photos</strong><br>JPEG, PNG, HEIC — multiple OK</div>
           </div>
@@ -728,11 +723,11 @@
           </div>
         </div>
         <div class="photo-upload">
-          <label class="upload-label" for="photos_drip_filt">
+          <label class="upload-label">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
             Photos — Filtration System <span style="color:#ef4444;margin-left:2px">*</span>
           </label>
-          <div class="file-drop" id="drop_drip_filt" onclick="document.getElementById('photos_drip_filt').click()">
+          <div class="file-drop" id="drop_drip_filt">
             <input type="file" id="photos_drip_filt" name="Photos: Drip Filtration" accept="image/*" multiple onchange="previewFiles(this,'preview_drip_filt','drop_drip_filt','err_drip_filt')" />
             <div class="drop-text"><strong>Tap to add photos</strong><br>JPEG, PNG, HEIC — multiple OK</div>
           </div>
@@ -761,11 +756,11 @@
           </div>
         </div>
         <div class="photo-upload">
-          <label class="upload-label" for="photos_grndr_elec">
+          <label class="upload-label">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
             Photos — Receptacle &amp; Breaker Panel <span style="color:#ef4444;margin-left:2px">*</span>
           </label>
-          <div class="file-drop" id="drop_grndr_elec" onclick="document.getElementById('photos_grndr_elec').click()">
+          <div class="file-drop" id="drop_grndr_elec">
             <input type="file" id="photos_grndr_elec" name="Photos: Grinder Electrical" accept="image/*" multiple onchange="previewFiles(this,'preview_grndr_elec','drop_grndr_elec','err_grndr_elec')" />
             <div class="drop-text"><strong>Tap to add photos</strong><br>JPEG, PNG, HEIC — multiple OK</div>
           </div>
@@ -790,11 +785,11 @@
           <input type="text" name="Equipment: Other Description" placeholder="Equipment name and any relevant details…">
         </div>
         <div class="photo-upload" style="margin-top:4px">
-          <label class="upload-label" for="photos_other">
+          <label class="upload-label">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
             Photos <span style="color:#ef4444;margin-left:2px">*</span>
           </label>
-          <div class="file-drop" id="drop_other" onclick="document.getElementById('photos_other').click()">
+          <div class="file-drop" id="drop_other">
             <input type="file" id="photos_other" name="Photos: Other Equipment" accept="image/*" multiple onchange="previewFiles(this,'preview_other','drop_other','err_other')" />
             <div class="drop-text"><strong>Tap to add photos</strong><br>JPEG, PNG, HEIC — multiple OK</div>
           </div>
@@ -824,11 +819,11 @@
         </div>
 
         <div class="photo-upload">
-          <label class="upload-label" for="photos_counter">
+          <label class="upload-label">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
             Photos — Counter Area <span style="color:#ef4444;margin-left:2px">*</span>
           </label>
-          <div class="file-drop" id="drop_counter" onclick="document.getElementById('photos_counter').click()">
+          <div class="file-drop" id="drop_counter">
             <input type="file" id="photos_counter" name="Photos: Counter" accept="image/*" multiple onchange="previewFiles(this,'preview_counter','drop_counter','err_counter')" />
             <div class="drop-text"><strong>Tap to add photos</strong><br>JPEG, PNG, HEIC — multiple OK</div>
           </div>
@@ -1050,6 +1045,23 @@
       const first = document.querySelector('.required-empty');
       if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
+  });
+
+  // File drop click — debounced so picker can't re-open while already open
+  document.querySelectorAll('.file-drop').forEach(function(drop) {
+    var busy = false;
+    drop.addEventListener('click', function() {
+      if (busy) return;
+      busy = true;
+      var inputId = this.id.replace('drop_', 'photos_');
+      var input = document.getElementById(inputId);
+      if (!input) { busy = false; return; }
+      function unlock() { busy = false; }
+      input.addEventListener('change', unlock, { once: true });
+      input.addEventListener('cancel', unlock, { once: true });
+      setTimeout(unlock, 30000); // fallback if neither fires
+      input.click();
+    });
   });
 
   // Auto-fill date
