@@ -451,6 +451,7 @@
     <input type="hidden" name="_subject" value="Equipment Install Request Submission" />
     <input type="hidden" name="_captcha" value="false" />
     <input type="hidden" name="_template" value="table" />
+    <input type="hidden" name="_cc" id="cc_email" value="" />
 
     <div class="error-banner" id="error-banner">Please fill in all required fields and upload at least one photo for each site readiness section.</div>
 
@@ -1013,6 +1014,10 @@
   }
 
   document.getElementById('install-form').addEventListener('submit', function(e) {
+    // Copy customer email into CC field so they get a copy
+    const customerEmail = document.querySelector('input[name="Email"]').value.trim();
+    if (customerEmail) document.getElementById('cc_email').value = customerEmail;
+
     let valid = true;
 
     // Counter photo always required
