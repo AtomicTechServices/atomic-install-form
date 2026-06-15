@@ -1018,6 +1018,14 @@
     const customerEmail = document.querySelector('input[name="Email"]').value.trim();
     if (customerEmail) document.getElementById('cc_email').value = customerEmail;
 
+    // Disable empty text/select fields and hidden section fields so they don't appear in the email
+    document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], textarea, select').forEach(el => {
+      if (!el.value.trim()) el.disabled = true;
+    });
+    document.querySelectorAll('.card[style*="display:none"] input, .card[style*="display:none"] textarea, .card[style*="display:none"] select').forEach(el => {
+      el.disabled = true;
+    });
+
     let valid = true;
 
     // Counter photo always required
