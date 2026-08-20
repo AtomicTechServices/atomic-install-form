@@ -442,16 +442,9 @@
   </div>
 
   <form
-    action="https://formsubmit.co/techservice@atomicroastery.com"
-    method="POST"
-    enctype="multipart/form-data"
     id="install-form"
     novalidate
   >
-    <input type="hidden" name="_subject" value="Equipment Install Request Submission" />
-    <input type="hidden" name="_captcha" value="false" />
-    <input type="hidden" name="_template" value="table" />
-    <input type="hidden" name="_cc" id="cc_email" value="" />
 
     <div class="error-banner" id="error-banner">Please fill in all required fields and upload at least one photo for each site readiness section.</div>
 
@@ -927,6 +920,13 @@
     </div>
 
   </form>
+
+  <div id="success-msg" style="display:none;text-align:center;padding:60px 24px">
+    <div style="font-size:48px;margin-bottom:16px">&#10003;</div>
+    <h2 style="font-family:'Cooper Black','Cooper Std Black',serif;font-size:28px;font-weight:400;color:#0a0a0a;margin-bottom:12px">Request Submitted!</h2>
+    <p style="font-size:15px;color:rgba(0,0,0,0.55);line-height:1.65;max-width:480px;margin:0 auto">Your installation request has been received. A confirmation has been sent to your email, and our technical team will follow up within 1–2 business days to confirm your install date.</p>
+  </div>
+
 </main>
 
 </div><!-- end #pw-content -->
@@ -1013,22 +1013,65 @@
     }
   }
 
-  document.getElementById('install-form').addEventListener('submit', function(e) {
-    // Copy customer email into CC field so they get a copy
-    const customerEmail = document.querySelector('input[name="Email"]').value.trim();
-    if (customerEmail) document.getElementById('cc_email').value = customerEmail;
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyVbmVjDjSHQu23igPs0lN25GdeuZEa3J4n9TecPllnS9p6wD0PJf95-lKTr3F-MFJh/exec';
 
-    // Disable empty text/select fields and hidden section fields so they don't appear in the email
-    document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], textarea, select').forEach(el => {
-      if (!el.value.trim()) el.disabled = true;
+  // Convert a File object to a base64 string
+  function fileToBase64(file) {
+    return new Promise(function(resolve, reject) {
+      const reader = new FileReader();
+      reader.onload  = function(e) {
+        // strip the "data:image/jpeg;base64," prefix
+        resolve(e.target.result.split(',')[1]);
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
     });
-    document.querySelectorAll('.card[style*="display:none"] input, .card[style*="display:none"] textarea, .card[style*="display:none"] select').forEach(el => {
-      el.disabled = true;
-    });
+  }
 
+  // Collect all file inputs into a flat array of {section, name, type, data}
+  async function collectPhotos() {
+    const photos = [];
+    const inputs = document.querySelectorAll('input[type="file"]');
+    for (const input of inputs) {
+      if (!input.files || input.files.length === 0) continue;
+      const section = input.name.replace('Photos: ', '');
+      for (const file of input.files) {
+        const b64 = await fileToBase64(file);
+        photos.push({ section: section, name: file.name, type: file.type, data: b64 });
+      }
+    }
+    return photos;
+  }
+
+  // Collect all non-file form fields into a plain object (skip empty values)
+  function collectFields() {
+    const out = {};
+    const form = document.getElementById('install-form');
+    // Text / email / tel / textarea / select
+    form.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], textarea, select').forEach(el => {
+      if (el.name && el.value.trim()) out[el.name] = el.value.trim();
+    });
+    // Checkboxes (Equipment, Available Days)
+    const cbGroups = {};
+    form.querySelectorAll('input[type="checkbox"]:checked').forEach(el => {
+      if (!el.name) return;
+      cbGroups[el.name] = cbGroups[el.name] || [];
+      cbGroups[el.name].push(el.value);
+    });
+    Object.assign(out, cbGroups);
+    // Radio buttons
+    form.querySelectorAll('input[type="radio"]:checked').forEach(el => {
+      if (el.name) out[el.name] = el.value;
+    });
+    return out;
+  }
+
+  document.getElementById('install-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    // ── Validation ──────────────────────────────────────
     let valid = true;
 
-    // Counter photo always required
     const counterInput = document.getElementById('photos_counter');
     if (!counterInput.files || counterInput.files.length === 0) {
       document.getElementById('drop_counter').classList.add('required-empty');
@@ -1036,7 +1079,6 @@
       valid = false;
     }
 
-    // Validate required photos only for visible equipment sections
     document.querySelectorAll('input[name="Equipment"]:checked').forEach(cb => {
       const config = EQUIPMENT_MAP[cb.value];
       if (!config) return;
@@ -1053,10 +1095,39 @@
     });
 
     if (!valid) {
-      e.preventDefault();
       document.getElementById('error-banner').classList.add('visible');
       const first = document.querySelector('.required-empty');
       if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    // ── Submit ───────────────────────────────────────────
+    const btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.textContent = 'Submitting…';
+
+    try {
+      const payload = collectFields();
+      payload.photos = await collectPhotos();
+
+      const resp = await fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        body: JSON.stringify(payload)
+      });
+      const result = await resp.json();
+
+      if (result.status === 'ok') {
+        document.getElementById('install-form').style.display = 'none';
+        document.getElementById('success-msg').style.display = 'block';
+      } else {
+        throw new Error(result.message || 'Submission failed');
+      }
+    } catch (err) {
+      btn.disabled = false;
+      btn.textContent = 'Submit Installation Request';
+      const banner = document.getElementById('error-banner');
+      banner.textContent = 'Something went wrong submitting your request. Please try again or email techservice@atomicroastery.com.';
+      banner.classList.add('visible');
     }
   });
 
