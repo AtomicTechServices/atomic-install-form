@@ -1147,18 +1147,16 @@
       const payload = collectFields();
       payload.photos = await collectPhotos();
 
-      const resp = await fetch(APPS_SCRIPT_URL, {
+      // mode: 'no-cors' is required for Apps Script — response will be opaque
+      await fetch(APPS_SCRIPT_URL, {
         method: 'POST',
+        mode: 'no-cors',
         body: JSON.stringify(payload)
       });
-      const result = await resp.json();
 
-      if (result.status === 'ok') {
-        document.getElementById('install-form').style.display = 'none';
-        document.getElementById('success-msg').style.display = 'block';
-      } else {
-        throw new Error(result.message || 'Submission failed');
-      }
+      // Opaque response = request sent successfully
+      document.getElementById('install-form').style.display = 'none';
+      document.getElementById('success-msg').style.display = 'block';
     } catch (err) {
       btn.disabled = false;
       btn.textContent = 'Submit Installation Request';
