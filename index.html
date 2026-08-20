@@ -781,7 +781,7 @@
         <div class="photo-upload" style="margin-top:4px">
           <label class="upload-label">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-            Photos <span style="color:#ef4444;margin-left:2px">*</span>
+            Photos <span class="hint">(optional)</span>
           </label>
           <div class="file-drop" id="drop_other">
             <input type="file" id="photos_other" name="Photos: Other Equipment" accept="image/*" multiple onchange="previewFiles(this,'preview_other','drop_other','err_other')" />
@@ -964,9 +964,45 @@
     },
     'Other': {
       section: 'section-other',
-      photos: ['photos_other']
+      photos: []
     }
   };
+
+  // Map: radio name → photo input ID it gates
+  // Photo is only required when the controlling radio is "Yes"
+  const PHOTO_GATES = {
+    'Espresso: Receptacle':  'photos_esp_elec',
+    'Espresso: Water Supply':'photos_esp_water',
+    'Espresso: Filtration':  'photos_esp_filt',
+    'Espresso: Drain':       'photos_esp_drain',
+    'Drip: Receptacle':      'photos_drip_elec',
+    'Drip: Water Supply':    'photos_drip_water',
+    'Drip: Filtration':      'photos_drip_filt',
+    'Grinder: Receptacle':   'photos_grndr_elec'
+  };
+
+  // Track which photo inputs are currently optional due to a No/Unknown radio selection
+  const photoOptional = {};
+
+  function setPhotoRequired(photoId, required) {
+    photoOptional[photoId] = !required;
+    const starEl = document.querySelector('label[for="' + photoId + '"] span[style*="ef4444"], .upload-label span[style*="ef4444"]');
+    const uploadLabel = document.getElementById('drop_' + photoId.replace('photos_', ''))
+      ?.closest('.photo-upload')?.querySelector('.upload-label');
+    if (uploadLabel) {
+      const star = uploadLabel.querySelector('span[style*="ef4444"]');
+      if (star) star.style.display = required ? '' : 'none';
+    }
+  }
+
+  Object.keys(PHOTO_GATES).forEach(function(radioName) {
+    document.querySelectorAll('input[name="' + radioName + '"]').forEach(function(radio) {
+      radio.addEventListener('change', function() {
+        const required = this.value === 'Yes';
+        setPhotoRequired(PHOTO_GATES[radioName], required);
+      });
+    });
+  });
 
   function clearSection(sectionId) {
     const section = document.getElementById(sectionId);
@@ -1083,6 +1119,7 @@
       const config = EQUIPMENT_MAP[cb.value];
       if (!config) return;
       config.photos.forEach(photoId => {
+        if (photoOptional[photoId]) return; // skip if radio was No/Unknown
         const input = document.getElementById(photoId);
         const drop  = document.getElementById(photoId.replace('photos_', 'drop_'));
         const err   = document.getElementById(photoId.replace('photos_', 'err_'));
